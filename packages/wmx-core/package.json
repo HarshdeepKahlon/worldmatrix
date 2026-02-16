@@ -1,0 +1,42 @@
+{
+  "name": "@worldmatrix/wmx-core",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Core types and manifest utilities for WorldMatrix assets.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worldmatrix/worldmatrix-private.git"
+  },
+  "homepage": "https://github.com/worldmatrix/worldmatrix-private#readme",
+  "bugs": {
+    "url": "https://github.com/worldmatrix/worldmatrix-private/issues"
+  },
+  "keywords": [
+    "worldmatrix",
+    "3d",
+    "gltf",
+    "glb",
+    "manifest"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
+

@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  asset-server:
+    build:
+      context: .
+      dockerfile: packages/wmx-asset-server/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - WMX_DATA_DIR=/data
+      - WMX_SOURCE_DIR=/data/source
+      - WMX_OUTPUT_DIR=/data/wmx
+    volumes:
+      - ./wmx_data:/data
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    ports:
+      - "3002:80"
+    depends_on:
+      - asset-server
+

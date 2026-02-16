@@ -1,0 +1,47 @@
+{
+  "name": "@worldmatrix/wmx-three-streaming",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Streaming refine-tree runtime for WorldMatrix assets on Three.js.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worldmatrix/worldmatrix-private.git"
+  },
+  "homepage": "https://github.com/worldmatrix/worldmatrix-private#readme",
+  "bugs": {
+    "url": "https://github.com/worldmatrix/worldmatrix-private/issues"
+  },
+  "keywords": [
+    "worldmatrix",
+    "threejs",
+    "streaming",
+    "lod",
+    "3d"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@worldmatrix/wmx-core": "^0.1.0",
+    "@worldmatrix/wmx-three": "^0.1.0",
+    "meshoptimizer": "^0.25.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

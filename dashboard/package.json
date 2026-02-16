@@ -1,0 +1,26 @@
+{
+  "name": "@worldmatrix/dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/copy-basis.mjs && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@worldmatrix/wmx-core": "^0.1.0",
+    "@worldmatrix/wmx-viewer": "0.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@types/wicg-file-system-access": "^2023.10.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.8.2",
+    "vite": "^6.1.0"
+  }
+}

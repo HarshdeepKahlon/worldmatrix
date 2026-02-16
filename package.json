@@ -1,0 +1,27 @@
+{
+  "name": "worldmatrix",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "dashboard",
+    "examples/*"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "npm run build -w @worldmatrix/wmx-core && npm run build -w @worldmatrix/wmx-cli && npm run build -w @worldmatrix/wmx-three && npm run build -w @worldmatrix/wmx-three-streaming && npm run build -w @worldmatrix/wmx-runtime && npm run build -w @worldmatrix/wmx-r3f && npm run build -w @worldmatrix/wmx-viewer && npm run build -w @worldmatrix/wmx-asset-server && npm run build -w @worldmatrix/dashboard",
+    "dev": "npm run dev -w dashboard",
+    "lint": "npm run --workspaces --if-present lint",
+    "format": "npm run --workspaces --if-present format",
+    "test": "npm run test:integration",
+    "test:integration": "npm run build && node --test tests/integration/*.test.mjs",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "publish:wmx": "npm publish -w @worldmatrix/wmx-core --access public && npm publish -w @worldmatrix/wmx-three --access public && npm publish -w @worldmatrix/wmx-three-streaming --access public && npm publish -w @worldmatrix/wmx-runtime --access public && npm publish -w @worldmatrix/wmx-r3f --access public"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "typescript": "^5.8.2"
+  }
+}
+

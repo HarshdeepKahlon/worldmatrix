@@ -1,0 +1,29 @@
+{
+  "name": "@worldmatrix/wmx-viewer",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@worldmatrix/wmx-core": "^0.1.0",
+    "@worldmatrix/wmx-runtime": "^0.1.0",
+    "@worldmatrix/wmx-three": "^0.1.0",
+    "@worldmatrix/wmx-three-streaming": "^0.1.0",
+    "react": "^19.1.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}

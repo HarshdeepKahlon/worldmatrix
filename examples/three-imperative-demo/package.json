@@ -1,0 +1,19 @@
+{
+  "name": "@worldmatrix/three-imperative-demo",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@worldmatrix/wmx-runtime": "^0.1.0",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.1.0"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@worldmatrix/wmx-asset-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.883.0",
+    "@worldmatrix/wmx-core": "^0.1.0",
+    "busboy": "^1.6.0",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.4",
+    "@types/express": "^4.17.22",
+    "typescript": "^5.8.2"
+  }
+}
+

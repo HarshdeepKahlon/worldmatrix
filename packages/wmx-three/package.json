@@ -1,0 +1,48 @@
+{
+  "name": "@worldmatrix/wmx-three",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Three.js WMX loader for selecting and loading WorldMatrix variants.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/worldmatrix/worldmatrix-private.git"
+  },
+  "homepage": "https://github.com/worldmatrix/worldmatrix-private#readme",
+  "bugs": {
+    "url": "https://github.com/worldmatrix/worldmatrix-private/issues"
+  },
+  "keywords": [
+    "worldmatrix",
+    "threejs",
+    "gltf",
+    "glb",
+    "loader"
+  ],
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@worldmatrix/wmx-core": "^0.1.0"
+  },
+  "peerDependencies": {
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
+
