@@ -36,6 +36,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@types/three": "^0.182.0",
     "@worldmatrix/wmx-core": "^0.1.0",
     "@worldmatrix/wmx-three": "^0.1.0",
     "meshoptimizer": "^0.25.0",
