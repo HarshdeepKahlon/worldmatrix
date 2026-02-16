@@ -7,7 +7,41 @@
 Open infrastructure for optimized 3D worlds. WorldMatrix builds fast, streamable asset outputs and provides 
 runtime loaders/viewers for web apps.
 
-## Quickstart (local)
+WorldMatrix builds on the [Khronos glTF 2.0 specification](https://www.khronos.org/gltf/) (glTF/GLB) and adds a small `.wmx` manifest layer for variant/streaming metadata. The pipeline heavily leverages open-source tooling like [glTF-Transform](https://gltf-transform.dev/) and [KTX-Software](https://github.com/KhronosGroup/KTX-Software) (KTX2/BasisU tooling).
+
+## Three.js integration (minimal)
+
+```ts
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { WMXLoader } from '@worldmatrix/wmx-three';
+
+const wmx = new WMXLoader(new GLTFLoader());
+const gltf = await wmx.load('/wmx/my-asset/asset.wmx.json', { quality: 'medium' });
+scene.add(gltf.scene);
+```
+
+For KTX2 output, configure `KTX2Loader` and pass it to `WMXLoader` (or use `@worldmatrix/wmx-runtime`).
+
+For an imperative runtime setup, see:
+- `workflows/integrations/three-imperative.md`
+
+## R3F / React integration (minimal)
+
+```tsx
+import { WMXModel } from '@worldmatrix/wmx-r3f';
+
+export function ModelCard() {
+  return <WMXModel manifestUrl="/wmx/my-asset/asset.wmx.json" quality="medium" />;
+}
+```
+
+For custom app integrations, see:
+- `workflows/integrations/r3f.md`
+- `workflows/integrations/nextjs.md`
+
+## Dashboard + generation (quickstart)
+
+### Local (CLI + dashboard)
 
 ```bash
 npm install
@@ -23,7 +57,7 @@ npm run dev -w dashboard
 
 Open `http://localhost:5173`, switch to local mode if needed, and pick your output folder.
 
-## Quickstart (Docker self-host)
+### Docker self-host (dashboard + asset-server)
 
 ```bash
 ./scripts/run-compose.sh
@@ -61,36 +95,6 @@ dist/<assetNameOrId>/
 
 Streaming metadata lives at `manifest.streaming` (schema: `wmx-streaming-refine-tree@1`).
 See `docs/spec/streaming-v1.md`.
-
-## Three.js integration (minimal)
-
-```ts
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { WMXLoader } from '@worldmatrix/wmx-three';
-
-const wmx = new WMXLoader(new GLTFLoader());
-const gltf = await wmx.load('/wmx/my-asset/asset.wmx.json', { quality: 'medium' });
-scene.add(gltf.scene);
-```
-
-For KTX2 output, configure `KTX2Loader` and pass it to `WMXLoader` (or use `@worldmatrix/wmx-runtime`).
-
-For an imperative runtime setup, see:
-- `workflows/integrations/three-imperative.md`
-
-## R3F / React integration (minimal)
-
-```tsx
-import { WMXModel } from '@worldmatrix/wmx-r3f';
-
-export function ModelCard() {
-  return <WMXModel manifestUrl="/wmx/my-asset/asset.wmx.json" quality="medium" />;
-}
-```
-
-For custom app integrations, see:
-- `workflows/integrations/r3f.md`
-- `workflows/integrations/nextjs.md`
 
 ## Benchmark/debug notes
 
