@@ -7,7 +7,8 @@
 Open infrastructure for optimized 3D worlds. WorldMatrix builds fast, streamable asset outputs and provides 
 runtime loaders/viewers for web apps.
 
-WorldMatrix builds on the [Khronos glTF 2.0 specification](https://www.khronos.org/gltf/) (glTF/GLB) and adds a small `.wmx` manifest layer for variant/streaming metadata. The pipeline heavily leverages open-source tooling like [glTF-Transform](https://gltf-transform.dev/) and [KTX-Software](https://github.com/KhronosGroup/KTX-Software) (KTX2/BasisU tooling).
+WMX uses glTF/GLB plus a small `.wmx` manifest layer for variant + streaming metadata. The pipeline uses
+[glTF-Transform](https://gltf-transform.dev/) and optionally [KTX-Software](https://github.com/KhronosGroup/KTX-Software) for KTX2/BasisU.
 
 ## Three.js integration (minimal)
 
@@ -119,7 +120,7 @@ See [workflows/README.md](workflows/README.md) for copy/paste runbooks.
 - **Stable now**:
   - `asset.wmx.json` core contract (`schemaVersion`, `assetId`, `variants`, `artifacts`, `streaming` field shape)
   - CLI build outputs and folder conventions
-  - Basic Three.js/R3F loading path (`WMXLoader`, `WMXAutoViewer`)
+  - Basic Three.js/R3F loading path (`WMXLoader`, `WMXModel`, `WMXStreamingTileset`)
 - **Experimental**:
   - Advanced streaming runtime heuristics (dispose/culling edge behavior, occlusion tuning)
   - Benchmark-mode runtime controls used for diagnostics

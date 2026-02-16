@@ -85,10 +85,10 @@ For each input, the CLI produces:
 Thumbnail rendering is **best-effort**. To enable thumbnails, install:
 
 ```bash
-npm install -w @worldmatrix/wmx-cli @shopify/screenshot-glb
+npm install @shopify/screenshot-glb
 ```
 
 If it’s not installed, `wmx build` will warn and continue.
 
-For Docker Compose (`wmx-asset-server`), the runtime image includes `@shopify/screenshot-glb` plus headless Chrome Linux dependencies, so dashboard-triggered builds can generate thumbnails without extra host setup.
+For Docker Compose (`wmx-asset-server`), the image includes `@shopify/screenshot-glb` plus headless Chrome Linux dependencies, so dashboard-triggered builds can generate thumbnails without extra host setup.
 

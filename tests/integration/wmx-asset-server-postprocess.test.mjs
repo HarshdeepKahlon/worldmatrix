@@ -143,7 +143,7 @@ test('wmx-asset-server build succeeds without MODEL_ENCRYPTION_KEY and keeps pla
   try {
     await waitForHealth(`http://127.0.0.1:${port}`);
 
-    const startRes = await fetch(`http://127.0.0.1:${port}/api/build-one`, {
+    const startRes = await fetchWithTimeout(`http://127.0.0.1:${port}/api/build-one`, 2000, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -219,7 +219,7 @@ test('wmx-asset-server build with MODEL_ENCRYPTION_KEY rewrites payload URLs to 
   try {
     await waitForHealth(`http://127.0.0.1:${port}`);
 
-    const startRes = await fetch(`http://127.0.0.1:${port}/api/build-one`, {
+    const startRes = await fetchWithTimeout(`http://127.0.0.1:${port}/api/build-one`, 2000, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -287,7 +287,7 @@ async function writeTinyGlb(outPath) {
 async function waitForHealth(baseUrl) {
   for (let i = 0; i < 60; i++) {
     try {
-      const res = await fetch(`${baseUrl}/api/health`);
+      const res = await fetchWithTimeout(`${baseUrl}/api/health`, 500);
       if (res.ok) return;
     } catch {
       // retry
@@ -299,10 +299,14 @@ async function waitForHealth(baseUrl) {
 
 async function waitForJobTerminal(baseUrl, jobId) {
   for (let i = 0; i < 300; i++) {
-    const res = await fetch(`${baseUrl}/api/build/${encodeURIComponent(jobId)}`);
-    if (res.ok) {
-      const json = await res.json();
-      if (json.status === 'succeeded' || json.status === 'failed') return json;
+    try {
+      const res = await fetchWithTimeout(`${baseUrl}/api/build/${encodeURIComponent(jobId)}`, 1000);
+      if (res.ok) {
+        const json = await res.json();
+        if (json.status === 'succeeded' || json.status === 'failed') return json;
+      }
+    } catch {
+      // retry
     }
     await sleep(100);
   }
@@ -313,9 +317,34 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function onceExit(child) {
+function onceExit(child, timeoutMs = 2000) {
   return new Promise((resolve, reject) => {
-    child.once('close', resolve);
-    child.once('error', reject);
+    const t = setTimeout(() => {
+      try {
+        child.kill('SIGKILL');
+      } catch {
+        // ignore
+      }
+      resolve();
+    }, timeoutMs);
+
+    child.once('close', () => {
+      clearTimeout(t);
+      resolve();
+    });
+    child.once('error', (err) => {
+      clearTimeout(t);
+      reject(err);
+    });
   });
+}
+
+async function fetchWithTimeout(url, timeoutMs, init) {
+  const controller = new AbortController();
+  const t = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(t);
+  }
 }
