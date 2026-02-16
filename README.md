@@ -4,20 +4,8 @@
 
 # worldmatrix
 
-Open infrastructure for optimized 3D worlds. WorldMatrix builds fast, streamable asset outputs and provides runtime loaders/viewers for web apps.
-
-## For developers
-
-- Build once, serve everywhere: generate WMX manifests + optimized variants/tiles for web/mobile.
-- Stable manifest contract: `asset.wmx.json` is the runtime source of truth.
-- Three.js/R3F runtime support with KTX2/meshopt/draco wiring helpers.
-- Debug tools: stats overlay, triangle counters, streaming debug signals.
-
-## For artists
-
-- Preserve artistic intent while producing lighter, faster runtime outputs.
-- Review optimization tradeoffs via generated metrics (`stats.json`) and thumbnails.
-- Predictable folder outputs for handoff, versioning, and asset management.
+Open infrastructure for optimized 3D worlds. WorldMatrix builds fast, streamable asset outputs and provides 
+runtime loaders/viewers for web apps.
 
 ## Quickstart (local)
 
@@ -26,7 +14,8 @@ npm install
 npm run build
 
 # Build one WMX asset
-node packages/wmx-cli/dist/cli.js build ./sample_assets/logitech_mouse.glb --out ./dist --name logitech-mouse
+INPUT_GLB="/path/to/model.glb"
+node packages/wmx-cli/dist/cli.js build "$INPUT_GLB" --out ./dist --name my-asset
 
 # Run dashboard in local mode
 npm run dev -w dashboard
@@ -37,7 +26,6 @@ Open `http://localhost:5173`, switch to local mode if needed, and pick your outp
 ## Quickstart (Docker self-host)
 
 ```bash
-npm install
 ./scripts/run-compose.sh
 ```
 
@@ -71,11 +59,8 @@ dist/<assetNameOrId>/
 
 ## Streaming schema (canonical)
 
-Streaming is first-class in v1 under:
-
-- `manifest.streaming` (schema id: `wmx-streaming-refine-tree@1`)
-
-Legacy fallback from `extras.streaming` is still supported by readers during transition, but producers should write `manifest.streaming`.
+Streaming metadata lives at `manifest.streaming` (schema: `wmx-streaming-refine-tree@1`).
+See `docs/spec/streaming-v1.md`.
 
 ## Three.js integration (minimal)
 
@@ -88,26 +73,18 @@ const gltf = await wmx.load('/wmx/my-asset/asset.wmx.json', { quality: 'medium' 
 scene.add(gltf.scene);
 ```
 
-For KTX2 output, configure `KTX2Loader` and pass it to `WMXLoader` (or use `@worldmatrix/wmx-viewer` helpers).
+For KTX2 output, configure `KTX2Loader` and pass it to `WMXLoader` (or use `@worldmatrix/wmx-runtime`).
 
-For batteries-included imperative setup, see:
+For an imperative runtime setup, see:
 - `workflows/integrations/three-imperative.md`
 
 ## R3F / React integration (minimal)
 
 ```tsx
-import { WMXAutoViewer } from '@worldmatrix/wmx-viewer';
+import { WMXModel } from '@worldmatrix/wmx-r3f';
 
 export function ModelCard() {
-  return (
-    <WMXAutoViewer
-      manifestUrl="/wmx/my-asset/asset.wmx.json"
-      renderer="webgpu"
-      debug
-      stats
-      streaming={{ retention: 'cache', disposeOutOfFrustumFrames: 30 }}
-    />
-  );
+  return <WMXModel manifestUrl="/wmx/my-asset/asset.wmx.json" quality="medium" />;
 }
 ```
 

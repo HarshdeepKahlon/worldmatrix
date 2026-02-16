@@ -12,7 +12,7 @@ The format is inspired by Keep a Changelog and this project follows semantic ver
 - Dashboard benchmark mode for loading multiple WMX assets in one scene.
 - Benchmark gizmo controls for positioning/rotating/scaling models.
 - Streaming retention controls (`cache` vs `dispose`) and debug logging in benchmark mode.
-- Streaming core schema promoted to top-level `manifest.streaming` with legacy fallback support.
+- Streaming core schema documented at top-level `manifest.streaming`.
 
 ### Changed
 

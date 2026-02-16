@@ -71,10 +71,15 @@ export function StreamingCanvas() {
 - If CSP blocks external CDN assets, override paths to self-hosted files:
 
 ```tsx
-const runtime = useWMXRuntime({
-  decoders: {
-    basisTranscoderPath: '/basis/',
-    dracoDecoderPath: '/draco/'
-  }
-});
+import { WMXModel, useWMXRuntime } from '@worldmatrix/wmx-r3f';
+
+export function ModelWithSelfHostedDecoders() {
+  const runtime = useWMXRuntime({
+    decoders: {
+      basisTranscoderPath: '/basis/',
+      dracoDecoderPath: '/draco/'
+    }
+  });
+  return <WMXModel runtime={runtime} manifestUrl="/wmx/my-asset/asset.wmx.json" quality="medium" />;
+}
 ```

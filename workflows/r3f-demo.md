@@ -1,6 +1,6 @@
 ## R3F demo site
 
-This repo includes a demo site using **React Three Fiber** + `@worldmatrix/wmx-r3f`.
+Demo site using React Three Fiber + `@worldmatrix/wmx-r3f`.
 
 From repo root:
 
@@ -30,7 +30,9 @@ python3 - <<'PY'
 import shutil
 from pathlib import Path
 
-src = Path("/Users/harshdeep/Downloads/setup-assets-20260201-134057/stream-deck")
+# Point this at a generated WMX asset folder (the folder containing `asset.wmx.json`).
+# Example: dist/my-asset/
+src = Path("dist/my-asset")
 dest = Path("examples/r3f-demo/public/wmx-bundled")
 dest.mkdir(parents=True, exist_ok=True)
 for child in src.iterdir():
@@ -48,7 +50,7 @@ PY
 Run with `WMX_ASSETS_DIR`:
 
 ```bash
-WMX_ASSETS_DIR="/Users/harshdeep/Documents/GitHub/worldmatrix/dist/setup-assets-20260201-134057" \
+WMX_ASSETS_DIR="/absolute/path/to/your/wmx/output/dist" \
   npm run dev -w examples/r3f-demo
 ```
 

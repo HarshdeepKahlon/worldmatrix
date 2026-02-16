@@ -1,6 +1,6 @@
 ## Three.js imperative demo site
 
-This repo includes a demo using **plain Three.js** + `@worldmatrix/wmx-runtime`.
+Demo using plain Three.js + `@worldmatrix/wmx-runtime`.
 
 From repo root:
 
@@ -25,7 +25,7 @@ Then open the Vite URL (default port `5175`).
 Run with `WMX_ASSETS_DIR`:
 
 ```bash
-WMX_ASSETS_DIR="/Users/harshdeep/Documents/GitHub/worldmatrix/dist/setup-assets-20260201-134057" \
+WMX_ASSETS_DIR="/absolute/path/to/your/wmx/output/dist" \
   npm run dev -w examples/three-imperative-demo
 ```
 

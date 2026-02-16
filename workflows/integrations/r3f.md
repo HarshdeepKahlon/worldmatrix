@@ -5,7 +5,7 @@ Use this when your app already has a `Canvas` and custom scene graph.
 ### Install
 
 ```bash
-npm install three @react-three/fiber @worldmatrix/wmx-r3f
+npm install three react @react-three/fiber @react-three/drei @worldmatrix/wmx-r3f
 ```
 
 ### Static WMX model in your scene

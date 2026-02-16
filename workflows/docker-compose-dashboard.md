@@ -22,7 +22,7 @@ mkdir -p wmx_data/source wmx_data/wmx
 Copy your source GLBs into `wmx_data/source/`:
 
 ```bash
-cp -R "/Users/harshdeep/Downloads/sample_assets/"*.glb wmx_data/source/
+cp "/path/to/models/"*.glb wmx_data/source/
 ```
 
 ### 2) Start containers
@@ -42,7 +42,7 @@ Services:
 - **dashboard**: `http://localhost:3000`
 
 Optional env for encrypted payloads:
-- `MODEL_ENCRYPTION_KEY`: when set, asset-server postprocess rewrites payload URLs to `.glb.br` (BuildCores-style encrypted brotli).
+- `MODEL_ENCRYPTION_KEY`: when set, asset-server postprocess rewrites payload URLs to `.glb.br` (encrypted brotli payloads).
 - If not set, builds still succeed and outputs remain plain `.glb` (default for local compose).
 
 ### 3) Trigger a build
@@ -51,7 +51,7 @@ Open the dashboard at `http://localhost:3000` and click **Build all**.
 
 The server will run `wmx build-streaming --stage 2` for each `.glb` in `/data/source` and write outputs into `/data/wmx`.
 
-### 3b) Upload from Finder (one or many)
+### 4) Upload from Finder (one or many)
 
 In the dashboard, use the **Upload source assets** section to select one or many `.glb` files from Finder.
 
@@ -65,7 +65,7 @@ If you hit `413 Request Entity Too Large`, make sure you rebuilt/restarted compo
 docker compose up --build
 ```
 
-### 4) View metrics
+### 5) View metrics
 
 The dashboard list shows assets discovered under `/data/wmx/**/asset.wmx.json`.
 
@@ -77,10 +77,10 @@ Each asset details page shows:
 
 ### Notes
 
-- **KTX2 tooling**: the `asset-server` image installs KTX-Software (`toktx`, `ktxsc`, `ktx`, `libktx.so*`) using the same pattern as BuildCores (pinned tarball + `ldconfig` + `ktx --version`).
+- **KTX2 tooling**: the `asset-server` image includes KTX-Software (`toktx`, `ktxsc`, `ktx`, `libktx.so*`) so server builds can generate KTX2 when requested.
 - **Encryption mode**:
   - local default (no key): serves/publishes plain `.glb` payloads.
-  - BuildCores mode (`MODEL_ENCRYPTION_KEY` set): converts payloads to `.glb.br` and rewrites manifest URLs/bytes.
+  - encrypted mode (`MODEL_ENCRYPTION_KEY` set): converts payloads to `.glb.br` and rewrites manifest URLs/bytes.
 - **Thumbnails**: server builds now request thumbnails by default. The asset-server image installs `@shopify/screenshot-glb` and required headless Chrome Linux libraries so `artifacts/thumbnail.png` is generated when rendering succeeds (best-effort).
 - **Upload limits**: dashboard nginx is configured for large uploads (`client_max_body_size` set in `dashboard/nginx.conf`).
 - **Reset state**:

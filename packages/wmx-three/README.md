@@ -14,9 +14,7 @@ npm install @worldmatrix/wmx-three three
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { WMXLoader } from '@worldmatrix/wmx-three';
 
-const loader = new WMXLoader({
-  gltfLoader: new GLTFLoader()
-});
+const loader = new WMXLoader(new GLTFLoader());
 
 const gltf = await loader.load('/wmx/my-asset/asset.wmx.json', { quality: 'medium' });
 ```

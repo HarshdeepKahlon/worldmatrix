@@ -55,8 +55,7 @@ Schema id: `wmx-streaming-refine-tree@1`
 
 ## Runtime compatibility notes
 
-- Current readers accept legacy `manifest.extras.streaming` as fallback.
-- Producers should write **only** `manifest.streaming` going forward.
+Runtimes resolve and consume `manifest.streaming` as described above.
 
 ## Recommended producer behavior
 
