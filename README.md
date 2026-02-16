@@ -11,6 +11,8 @@ WMX is built on the [Khronos glTF 2.0 specification](https://www.khronos.org/glt
 variant + streaming metadata. The pipeline uses [glTF-Transform](https://gltf-transform.dev/) and optionally
 [KTX-Software](https://github.com/KhronosGroup/KTX-Software) for KTX2/BasisU.
 
+![WorldMatrix diagram](assets/wmx-diagram.png)
+
 ## Three.js integration (minimal)
 
 ```ts
